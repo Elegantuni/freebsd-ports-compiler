@@ -28,7 +28,7 @@ int main(int argc, char *argv[])
 
 	while(choice != 100)
 	{
-		while(choice != 1 && choice != 2 && choice != 3 && choice != 4 &&  choice != 5 && choice != 6 && choice != 7 && choice != 8 && choice != 100)
+		while(choice != 1 && choice != 2 && choice != 3 && choice != 4 &&  choice != 5 && choice != 6 && choice != 7 && choice != 8 && choice != 9 && choice != 100)
 		{
 			printf("Enter 1 to configure all packages on command line\n");
 			printf("Enter 2 to fetch all packages on command line\n");
@@ -38,6 +38,7 @@ int main(int argc, char *argv[])
 			printf("Enter 6 to clean all packages on command line\n");
 			printf("Enter 7 to fetch and extract ports tree\n");
 			printf("Enter 8 to fetch and update ports tree\n");
+			printf("Enter 9 to get shell\n");
 			printf("Enter 100 to exit\n");
 			fflush(stdin);
 			scanf("%d", &choice);
@@ -203,6 +204,10 @@ int main(int argc, char *argv[])
 			system("portsnap fetch");
 			system("portsnap update");
 		}
+		if(choice == 9)
+		{
+			system("su -");
+		}
 		
 		printf("Enter 1 to config all packages on command line\n");
 		printf("Enter 2 to fetch all packages on command line\n");
@@ -212,6 +217,7 @@ int main(int argc, char *argv[])
 		printf("Enter 6 to clean all packages on command line\n");
 		printf("Enter 7 to fetch and extract ports tree\n");
 		printf("Enter 8 to fetch and update ports tree\n");
+		printf("Enter 9 to get shell\n");
 		printf("Enter 100 to exit\n");
 
 		fflush(stdin);

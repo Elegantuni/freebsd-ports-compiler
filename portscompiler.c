@@ -214,7 +214,6 @@ int main(int argc, char *argv[])
 		if(choice == 10)
 		{
 			chdir("/usr/src");
-			system("cd /usr/src");
 			system("make buildkernel KERNCONF=GENERIC");
 			system("make installkernel KERNCONF=GENERIC");
 		}

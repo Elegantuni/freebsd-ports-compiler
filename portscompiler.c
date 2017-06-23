@@ -28,7 +28,7 @@ int main(int argc, char *argv[])
 
 	while(choice != 100)
 	{
-		while(choice != 1 && choice != 2 && choice != 3 && choice != 4 &&  choice != 5 && choice != 6 && choice != 7 && choice != 8 && choice != 9 && choice != 100)
+		while(choice != 1 && choice != 2 && choice != 3 && choice != 4 &&  choice != 5 && choice != 6 && choice != 7 && choice != 8 && choice != 9 && choice != 10 && choice != 11 && choice != 12 && choice != 100)
 		{
 			printf("Enter 1 to configure all packages on command line\n");
 			printf("Enter 2 to fetch all packages on command line\n");
@@ -39,6 +39,9 @@ int main(int argc, char *argv[])
 			printf("Enter 7 to fetch and extract ports tree\n");
 			printf("Enter 8 to fetch and update ports tree\n");
 			printf("Enter 9 to get shell\n");
+			printf("Enter 10 to compile a kernel with a specific config (defaults to GENERIC)\n");
+			printf("Enter 11 to edit GENERIC i386 kernel config\n");
+			printf("Enter 12 to edit GENERIC amd64 kernel config\n");
 			printf("Enter 100 to exit\n");
 			fflush(stdin);
 			scanf("%d", &choice);
@@ -208,6 +211,21 @@ int main(int argc, char *argv[])
 		{
 			system("su -");
 		}
+		if(choice == 10)
+		{
+			chdir("/usr/src");
+			system("cd /usr/src");
+			system("make buildkernel KERNCONF=GENERIC");
+			system("make installkernel KERNCONF=GENERIC");
+		}
+		if(choice == 11)
+		{
+			system("/usr/bin/vi /usr/src/sys/i386/conf/GENERIC");
+		}
+		if(choice == 12)
+		{
+			system("/usr/bin/vi /usr/src/sys/amd64/conf/GENERIC");
+		}
 		
 		printf("Enter 1 to config all packages on command line\n");
 		printf("Enter 2 to fetch all packages on command line\n");
@@ -218,6 +236,9 @@ int main(int argc, char *argv[])
 		printf("Enter 7 to fetch and extract ports tree\n");
 		printf("Enter 8 to fetch and update ports tree\n");
 		printf("Enter 9 to get shell\n");
+		printf("Enter 10 to compile a kernel with a specific config (defaults to GENERIC)\n");
+		printf("Enter 11 to edit GENERIC i386 kernel config\n");
+		printf("Enter 12 to edit GENERIC amd64 kernel config\n");
 		printf("Enter 100 to exit\n");
 
 		fflush(stdin);

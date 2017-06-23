@@ -39,7 +39,7 @@ int main(int argc, char *argv[])
 			printf("Enter 7 to fetch and extract ports tree\n");
 			printf("Enter 8 to fetch and update ports tree\n");
 			printf("Enter 9 to get shell\n");
-			printf("Enter 10 to compile a kernel with a specific config (defaults to GENERIC)\n");
+			printf("Enter 10 to compile a kernel with a specific config (defaults to GENERIC).  This also installs the kernel.\n");
 			printf("Enter 11 to edit GENERIC i386 kernel config\n");
 			printf("Enter 12 to edit GENERIC amd64 kernel config\n");
 			printf("Enter 100 to exit\n");
@@ -236,7 +236,7 @@ int main(int argc, char *argv[])
 		printf("Enter 7 to fetch and extract ports tree\n");
 		printf("Enter 8 to fetch and update ports tree\n");
 		printf("Enter 9 to get shell\n");
-		printf("Enter 10 to compile a kernel with a specific config (defaults to GENERIC)\n");
+		printf("Enter 10 to compile a kernel with a specific config (defaults to GENERIC).  This also installs the kernel.\n");
 		printf("Enter 11 to edit GENERIC i386 kernel config\n");
 		printf("Enter 12 to edit GENERIC amd64 kernel config\n");
 		printf("Enter 100 to exit\n");

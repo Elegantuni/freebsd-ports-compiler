@@ -28,7 +28,7 @@ int main(int argc, char *argv[])
 
 	while(choice != 100)
 	{
-		while(choice != 1 && choice != 2 && choice != 3 && choice != 4 &&  choice != 5 && choice != 6 && choice != 7 && choice != 8 && choice != 9 && choice != 10 && choice != 11 && choice != 12 && choice != 13 && choice != 100)
+		while(choice != 1 && choice != 2 && choice != 3 && choice != 4 &&  choice != 5 && choice != 6 && choice != 7 && choice != 8 && choice != 9 && choice != 10 && choice != 11 && choice != 12 && choice != 13 && choice != 14 && choice != 15 && choice != 100)
 		{
 			printf("Enter 1 to configure all packages on command line\n");
 			printf("Enter 2 to fetch all packages on command line\n");
@@ -43,6 +43,8 @@ int main(int argc, char *argv[])
 			printf("Enter 11 to install the GENERIC kernel\n");
 			printf("Enter 12 to edit GENERIC i386 kernel config\n");
 			printf("Enter 13 to edit GENERIC amd64 kernel config\n");
+			printf("Enter 14 to delete config of packages\n");
+			printf("Enter 15 to uninstall packages\n");
 			printf("Enter 100 to exit\n");
 			fflush(stdin);
 			scanf("%d", &choice);
@@ -230,6 +232,52 @@ int main(int argc, char *argv[])
 		{
 			system("/usr/bin/vi /usr/src/sys/amd64/conf/GENERIC");
 		}
+		if(choice == 14)
+		{
+			number = 1;
+			
+			while(number < argc)
+         		{
+         			chdir(argv[number]);
+
+         			fpdir = opendir(argv[number]);
+
+         			while((namefile = readdir(fpdir)) != NULL)
+            			{
+            				if(strcmp(namefile->d_name, "Makefile") == 0)
+               				{
+               					system("make rmconfig-recursive");
+					}
+				}
+
+				closedir(fpdir);
+				
+				number++;
+			}
+		}
+		if(choice == 15)
+		{
+			number = 1;
+
+			while(number < argc)
+         		{
+         			chdir(argv[number]);
+
+         			fpdir = opendir(argv[number]);
+
+         			while((namefile = readdir(fpdir)) != NULL)
+            			{
+            				if(strcmp(namefile->d_name, "Makefile") == 0)
+            				{
+						system("make deinstall");
+					}
+				}
+				
+				closedir(fpdir);
+				
+				number++;
+			}
+		}
 		
 		printf("Enter 1 to config all packages on command line\n");
 		printf("Enter 2 to fetch all packages on command line\n");
@@ -244,6 +292,8 @@ int main(int argc, char *argv[])
 		printf("Enter 11 to install the GENERIC kernel\n");
 		printf("Enter 12 to edit GENERIC i386 kernel config\n");
 		printf("Enter 13 to edit GENERIC amd64 kernel config\n");
+		printf("Enter 14 to delete config of packages\n");
+		printf("Enter 15 to uninstall packages\n");
 		printf("Enter 100 to exit\n");
 
 		fflush(stdin);

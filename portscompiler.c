@@ -44,7 +44,6 @@ int main(int argc, char *argv[])
 			printf("Enter 12 to edit GENERIC i386 kernel config\n");
 			printf("Enter 13 to edit GENERIC amd64 kernel config\n");
 			printf("Enter 14 to delete config of packages\n");
-			printf("Enter 15 to uninstall packages\n");
 			printf("Enter 100 to exit\n");
 			fflush(stdin);
 			scanf("%d", &choice);
@@ -148,31 +147,27 @@ int main(int argc, char *argv[])
 		}
 		if(choice == 5)
 		{
-			number = 1;
-			
-			while(number < argc)
-			{
-				for(int i = 0; i < sizeof(buf); i++)
-				{
-					buf[i] = '\0';
-				}
+            number = 1;
 
-				strncpy(buf, argv[number], sizeof(buf) - 1);
+            while(number < argc)
+                {
+                    chdir(argv[number]);
 
-				char buffer[4096];
+                    fpdir = opendir(argv[number]);
 
-				snprintf(buffer, sizeof(buffer), "echo %s > .test1; gawk -F/ '{print $NF}' .test1 > .test2; pkg info `cat .test2` > .test3; pkg remove `cat .test3`; rm .test1 .test2 .test3", buf);
+                    while((namefile = readdir(fpdir)) != NULL)
+                        {
+                            if(strcmp(namefile->d_name, "Makefile") == 0)
+                            {
+                        system("make deinstall");
+                    }
+                }
 
-				system(buffer);
+                closedir(fpdir);
 
-				for(int i = 0; i < sizeof(buffer); i++)
-				{
-					buffer[i] = '\0';
-				}
-
-				number++;
-			}
-		}
+                number++;
+            }
+        }
 		if(choice == 6)
 		{
 			number = 1;
@@ -255,29 +250,6 @@ int main(int argc, char *argv[])
 				number++;
 			}
 		}
-		if(choice == 15)
-		{
-			number = 1;
-
-			while(number < argc)
-         		{
-         			chdir(argv[number]);
-
-         			fpdir = opendir(argv[number]);
-
-         			while((namefile = readdir(fpdir)) != NULL)
-            			{
-            				if(strcmp(namefile->d_name, "Makefile") == 0)
-            				{
-						system("make deinstall");
-					}
-				}
-				
-				closedir(fpdir);
-				
-				number++;
-			}
-		}
 		
 		printf("Enter 1 to config all packages on command line\n");
 		printf("Enter 2 to fetch all packages on command line\n");
@@ -293,7 +265,6 @@ int main(int argc, char *argv[])
 		printf("Enter 12 to edit GENERIC i386 kernel config\n");
 		printf("Enter 13 to edit GENERIC amd64 kernel config\n");
 		printf("Enter 14 to delete config of packages\n");
-		printf("Enter 15 to uninstall packages\n");
 		printf("Enter 100 to exit\n");
 
 		fflush(stdin);

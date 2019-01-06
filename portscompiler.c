@@ -44,6 +44,7 @@ int main(int argc, char *argv[])
 			printf("Enter 12 to edit GENERIC i386 kernel config\n");
 			printf("Enter 13 to edit GENERIC amd64 kernel config\n");
 			printf("Enter 14 to delete config of packages\n");
+			printf("Enter 15 to create, edit, compile, and install custom amd64 kernel\n");
 			printf("Enter 100 to exit\n");
 			fflush(stdin);
 			scanf("%d", &choice);
@@ -250,6 +251,36 @@ int main(int argc, char *argv[])
 				number++;
 			}
 		}
+		if(choice == 15)
+		{
+			chdir("/usr/src");
+			
+			printf("Enter the name of the kernel config you want to create\n");
+
+			char buffertemp1[256];
+			char buffertemp2[350];
+			char buffertemp3[350];
+			char buffertemp4[350];
+			char buffertemp5[350];
+
+			scanf("%255s", buffertemp1);
+
+			snprintf(buffertemp2, sizeof(buffertemp2), "cp /usr/src/sys/amd64/conf/GENERIC /usr/src/sys/amd64/conf/%s", buffertemp1);
+
+			snprintf(buffertemp3, sizeof(buffertemp3), "vi /usr/src/sys/amd64/conf/%s", buffertemp1);
+
+			snprintf(buffertemp4, sizeof(buffertemp4), "make buildkernel KERNCONF=%s", buffertemp1);
+
+			snprintf(buffertemp5, sizeof(buffertemp5), "make installkernel KERNCONF=%s", buffertemp1);
+
+			system(buffertemp2);
+
+			system(buffertemp3);
+
+			system(buffertemp4);
+		
+			system(buffertemp5);										
+		}
 		
 		printf("Enter 1 to config all packages on command line\n");
 		printf("Enter 2 to fetch all packages on command line\n");
@@ -265,6 +296,7 @@ int main(int argc, char *argv[])
 		printf("Enter 12 to edit GENERIC i386 kernel config\n");
 		printf("Enter 13 to edit GENERIC amd64 kernel config\n");
 		printf("Enter 14 to delete config of packages\n");
+		printf("Enter 15 to create, edit, compile, and install custom amd64 kernel\n");
 		printf("Enter 100 to exit\n");
 
 		fflush(stdin);
